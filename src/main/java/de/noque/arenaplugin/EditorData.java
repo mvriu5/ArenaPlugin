@@ -11,29 +11,25 @@ import org.bukkit.inventory.Inventory;
 
 public class EditorData {
 
+
+    /* SERIALIZE */
     public static String serializeInv(Inventory inv) {
-        String serialized = ItemStackSerializer.serializeInventory(inv);
-        return serialized;
+        return ItemStackSerializer.serializeInventory(inv);
     }
 
-    public static Inventory deserializeInv(Player player, String string) {
-        Inventory deserialized = ItemStackSerializer.deserializeInventory(string).toInventory(player);;
-        return deserialized;
+    /* DESERIALIZE */
+    public static Inventory deserializeInv(Player player, String kit) {
+        return ItemStackSerializer.deserializeInventory(kit).toInventory(player);
     }
 
     /* LOAD STATS */
-    public static void load(Player player, Inventory inv) {
+    public static void load(Player player) {
         if (ArenaPlugin.getEditorCollection().countDocuments(Filters.eq("UUID", player.getUniqueId())) == 0) {
             ArenaPlugin.getEditorCollection().insertOne(new Document("UUID", player.getUniqueId())
-                    .append("Rod", serializeInv(RodInventory.getInv(player)))
-                    .append("Soup", serializeInv(SoupInventory.getInv(player)))
-                    .append("BuildUHC", serializeInv(BuildUHCInventory.getInv(player))));
+                    .append("Rod", serializeInv(RodInventory.getDefaultInv(player)))
+                    .append("Soup", serializeInv(SoupInventory.getDefaultInv(player)))
+                    .append("BuildUHC", serializeInv(BuildUHCInventory.getDefaultInv(player))));
         }
-    }
-
-    /* RESET KIT */
-    public static void reset(Player player) {
-        ArenaPlugin.getEditorCollection().deleteOne(Filters.eq("UUID", player.getUniqueId()));
     }
 
     /* UPDATE KIT */
@@ -43,8 +39,9 @@ public class EditorData {
     }
 
     /* GETTER */
-    public static int getData(Player player, String kit) {
+    public static Inventory getData(Player player, String kit) {
         Document found = ArenaPlugin.getEditorCollection().find(Filters.eq("UUID", player.getUniqueId())).first();
-        return (int) found.get(kit);
+        String inv = (String) found.get(kit);
+        return deserializeInv(player, inv);
     }
 }

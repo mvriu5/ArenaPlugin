@@ -1,6 +1,7 @@
 package de.noque.arenaplugin.listener;
 
 import de.noque.arenaplugin.ArenaPlugin;
+import de.noque.arenaplugin.EditorData;
 import de.noque.arenaplugin.kits.BuildUHCInventory;
 import de.noque.arenaplugin.kits.RodInventory;
 import de.noque.arenaplugin.kits.SoupInventory;
@@ -30,15 +31,15 @@ public class InventoryListener implements Listener {
             switch(e.getCurrentItem().getType()) {
                 case FISHING_ROD:
                     ArenaPlugin.addToKit(player, "Rod");
-                    new RodInventory(player);
+                    EditorData.getData(player, "Rod");
                     break;
                 case MUSHROOM_SOUP:
                     ArenaPlugin.addToKit(player, "Soup");
-                    new SoupInventory(player);
+                    EditorData.getData(player, "Rod");
                     break;
                 case LAVA_BUCKET:
                     ArenaPlugin.addToKit(player, "BuildUHC");
-                    new BuildUHCInventory(player);
+                    EditorData.getData(player, "Rod");
                     break;
                 default:
                     break;
@@ -57,15 +58,15 @@ public class InventoryListener implements Listener {
             switch(e.getCurrentItem().getType()) {
                 case FISHING_ROD:
                     ArenaPlugin.addToEditor(player, "Rod");
-                    new RodInventory(player);
+                    EditorData.getData(player, "Rod");
                     break;
                 case MUSHROOM_SOUP:
                     ArenaPlugin.addToEditor(player, "Soup");
-                    new SoupInventory(player);
+                    EditorData.getData(player, "Soup");
                     break;
                 case LAVA_BUCKET:
                     ArenaPlugin.addToEditor(player, "BuildUHC");
-                    new BuildUHCInventory(player);
+                    EditorData.getData(player, "BuildUHC");
                     break;
                 default:
                     break;

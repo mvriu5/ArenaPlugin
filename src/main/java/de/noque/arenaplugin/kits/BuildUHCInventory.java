@@ -11,10 +11,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class BuildUHCInventory {
 
     public BuildUHCInventory(Player player) {
-        getInv(player);
+        getDefaultInv(player);
     }
 
-    public static Inventory getInv(Player player) {
+    public static Inventory getDefaultInv(Player player) {
 
         player.getInventory().clear();
 

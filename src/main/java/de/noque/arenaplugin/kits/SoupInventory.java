@@ -13,10 +13,10 @@ import static org.bukkit.potion.PotionEffectType.DAMAGE_RESISTANCE;
 public class SoupInventory {
 
     public SoupInventory(Player player) {
-        getInv(player);
+        getDefaultInv(player);
     }
 
-    public static Inventory getInv(Player player) {
+    public static Inventory getDefaultInv(Player player) {
 
         player.getInventory().clear();
 

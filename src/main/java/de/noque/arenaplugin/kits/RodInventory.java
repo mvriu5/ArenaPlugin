@@ -40,10 +40,4 @@ public class RodInventory {
 
         return player.getInventory();
     }
-
-    public static Inventory getCustomInv(Player player) {
-        Inventory deserialized = ItemStackSerializer.deserializeInventory(string).toInventory(player);;
-        return deserialized;
-        }
-    }
 }
