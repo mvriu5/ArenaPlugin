@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.frengor:inventorymanagementplugin-common:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frengor/inventorymanagementplugin-common/1.0-SNAPSHOT/inventorymanagementplugin-common-1.0-20210604.170116-5.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frengor/inventorymanagementplugin-common/1.0-SNAPSHOT/inventorymanagementplugin-common-1.0-20210604.170116-5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frengor/inventorymanagementplugin-common/1.0-SNAPSHOT/inventorymanagementplugin-common-1.0-20210604.170116-5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

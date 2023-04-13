@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.frengor:savingutil:1.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frengor/savingutil/1.1-SNAPSHOT/savingutil-1.1-20210604.170220-4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frengor/savingutil/1.1-SNAPSHOT/savingutil-1.1-20210604.170220-4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frengor/savingutil/1.1-SNAPSHOT/savingutil-1.1-20210604.170220-4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

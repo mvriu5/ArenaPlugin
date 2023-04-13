@@ -1,0 +1,18 @@
+name: SoupDamager
+version: '${project.version}'
+main: de.noque.arenaplugin.ArenaPlugin
+api-version: 1.19
+commands:
+  spawn:
+  setspawn:
+  ping:
+  clear:
+  fix:
+  kit:
+  damager:
+  setdamager:
+  help:
+  reset:
+  stats:
+  resetstats:
+  save:
