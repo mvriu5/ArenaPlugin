@@ -1,8 +1,9 @@
 package de.noque.arenaplugin.kits;
 
-import com.fren_gor.invManagementPlugin.api.itemStack.ItemStackSerializer;
+import de.noque.arenaplugin.ArenaPlugin;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -10,13 +11,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class RodInventory {
 
-
-    public RodInventory(Player player) {
-        getDefaultInv(player);
-    }
-
-    public static Inventory getDefaultInv(Player player) {
-        player.getInventory().clear();
+    public static Inventory getInv() {
+        Inventory inv = Bukkit.createInventory(null, InventoryType.PLAYER);
 
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta swordMeta = sword.getItemMeta();
@@ -31,13 +27,13 @@ public class RodInventory {
         ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
 
-        player.getInventory().setItem(0, sword);
-        player.getInventory().setItem(1, rod);
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
+        inv.setItem(0, sword);
+        inv.setItem(1, rod);
+        inv.setItem(2, helmet);
+        inv.setItem(3, chestplate);
+        inv.setItem(4, leggings);
+        inv.setItem(5, boots);
 
-        return player.getInventory();
+        return inv;
     }
 }

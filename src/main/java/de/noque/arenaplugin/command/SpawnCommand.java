@@ -15,25 +15,23 @@ public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player) {
+        if (!(sender instanceof Player)) return false;
 
-            Player player = (Player) sender;
-            new SpawnGUI(player);
+        Player player = (Player) sender;
 
-            ArenaPlugin.addToLobby(player);
-            ArenaPlugin.removeFromKit(player);
-            ArenaPlugin.removeFromEditor(player);
+        ArenaPlugin.addToLobby(player);
+        ArenaPlugin.removeFromKit(player);
+        ArenaPlugin.removeFromEditor(player);
+        new SpawnGUI(player);
+        player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 0.5F);
 
-            player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 0.5F);
-
-            try {
-                player.teleport(ConfigManager.getSpawn());
-            } catch (NullPointerException ex) {
-                player.sendMessage(ChatColor.RED + "Spawn isn't set yet.");
-            }
-
-
+        try {
+            player.teleport(ConfigManager.getSpawn());
+        } catch (NullPointerException ex) {
+            player.sendMessage(ChatColor.RED + "Spawn isn't set yet.");
         }
+
         return false;
+
     }
 }

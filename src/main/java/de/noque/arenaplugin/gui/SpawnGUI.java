@@ -30,14 +30,14 @@ public class SpawnGUI {
         ItemMeta chestMeta = chest.getItemMeta();
         chestMeta.setDisplayName(ChatColor.GOLD + "KIT SELECTOR " + ChatColor.GRAY + "(Right Click)");
         chest.setItemMeta(chestMeta);
-        player.getInventory().setItem(4, chest);
+        player.getInventory().setItem(3, chest);
 
         //KIT EDITOR
         ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta bookMeta = book.getItemMeta();
         bookMeta.setDisplayName(ChatColor.GOLD + "KIT EDITOR " + ChatColor.GRAY + "(Right Click)");
         book.setItemMeta(bookMeta);
-        player.getInventory().setItem(4, book);
+        player.getInventory().setItem(5, book);
 
     }
 }

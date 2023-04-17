@@ -32,9 +32,9 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.12.12" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.26" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.frengor:inventorymanagementplugin:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.frengor:inventorymanagementplugin-common:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.frengor:inventorymanagementplugin-items:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.frengor:savingutil:1.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.frengor:inventorymanagementplugin:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.frengor:inventorymanagementplugin-common:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.frengor:inventorymanagementplugin-items:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.frengor:savingutil:1.1-SNAPSHOT" level="project" />
   </component>
 </module>

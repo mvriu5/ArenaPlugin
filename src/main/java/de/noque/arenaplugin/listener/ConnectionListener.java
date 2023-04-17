@@ -3,7 +3,7 @@ package de.noque.arenaplugin.listener;
 import de.noque.arenaplugin.ArenaPlugin;
 import de.noque.arenaplugin.ConfigManager;
 import de.noque.arenaplugin.EditorData;
-import de.noque.arenaplugin.PlayerStats;
+import de.noque.arenaplugin.StatsData;
 import de.noque.arenaplugin.gui.SpawnGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,8 +20,9 @@ public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onLogin(PlayerLoginEvent e) {
-        Bukkit.getScheduler().runTaskAsynchronously(ArenaPlugin.INSTANCE, () -> PlayerStats.load(e.getPlayer()));
-        Bukkit.getScheduler().runTaskAsynchronously(ArenaPlugin.INSTANCE, () -> EditorData.load(e.getPlayer()));
+        Player player = e.getPlayer();
+        Bukkit.getScheduler().runTaskAsynchronously(ArenaPlugin.INSTANCE, () -> StatsData.load(player));
+        Bukkit.getScheduler().runTaskAsynchronously(ArenaPlugin.INSTANCE, () -> EditorData.load(player));
     }
 
     @EventHandler

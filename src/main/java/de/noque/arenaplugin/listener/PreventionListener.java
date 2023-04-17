@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -14,11 +13,11 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
-import static org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason.*;
+import static org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason.REGEN;
+import static org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason.SATIATED;
 
 public class PreventionListener implements Listener {
 
@@ -34,13 +33,8 @@ public class PreventionListener implements Listener {
          if (!(player.getGameMode() == GameMode.CREATIVE)) {
              e.setCancelled(true);
          }
-         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC")) {
-             e.setCancelled(false);
-
-             if (e.getBlock().getY() > 28) {
-                 e.setCancelled(true);
-             }
-
+         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC") && e.getBlock().getY() > 28) {
+             e.setCancelled(true);
              ArenaPlugin.getNewBlocks().add(e.getBlock());
          }
      }
@@ -52,7 +46,6 @@ public class PreventionListener implements Listener {
         if (!(player.getGameMode() == GameMode.CREATIVE)) {
             e.setCancelled(true);
         }
-
         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC") && ArenaPlugin.getNewBlocks().contains(e.getBlock())) {
             e.setCancelled(false);
         }
@@ -67,17 +60,14 @@ public class PreventionListener implements Listener {
     public void onDrop(PlayerDropItemEvent e) {
         Player player = e.getPlayer();
 
-        if (ArenaPlugin.getLobby().contains(player.getUniqueId())) {
-            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-                e.setCancelled(true);
-            }
+        if (ArenaPlugin.getLobby().contains(player.getUniqueId()) && player.getGameMode().equals(GameMode.SURVIVAL)) {
+            e.setCancelled(true);
         }
 
-        final Item item = e.getItemDrop();
-
         //Schedule remove of the item in 15 Seconds.
+        final Item item = e.getItemDrop();
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            if(item != null && !item.isDead() && item.isValid()){
+            if(item != null && !item.isDead() && item.isValid()) {
                 item.remove();
             }
         }, 15 * 20);
@@ -88,10 +78,8 @@ public class PreventionListener implements Listener {
     public void onPickUp(PlayerPickupItemEvent e) {
          Player player = e.getPlayer();
 
-        if (ArenaPlugin.getLobby().contains(player.getUniqueId())) {
-            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-                e.setCancelled(true);
-            }
+        if (ArenaPlugin.getLobby().contains(player.getUniqueId()) && player.getGameMode().equals(GameMode.SURVIVAL)) {
+            e.setCancelled(true);
         }
     }
 

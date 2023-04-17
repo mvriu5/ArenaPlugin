@@ -68,7 +68,7 @@ public final class ArenaPlugin extends JavaPlugin {
         getCommand("reset").setExecutor(new ResetCommand());
         getCommand("stats").setExecutor(new StatsCommand());
         getCommand("resetstats").setExecutor(new ResetStatsCommand());
-        getCommand("save").setExecutor(new ResetStatsCommand());
+        getCommand("save").setExecutor(new SaveCommand());
 
         /*    Events    */
         Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
@@ -129,6 +129,16 @@ public final class ArenaPlugin extends JavaPlugin {
             }
         }
         getNewBlocks().clear();
+    }
+
+    /* SERIALIZE INVENTORY */
+    public static String serializeInv(Inventory inv) {
+        return ItemStackSerializer.serializeInventory(inv);
+    }
+
+    /* DESERIALIZE INVENTORY */
+    public static Inventory deserializeInv(Player player, String inv) {
+        return ItemStackSerializer.deserializeInventory(inv).toInventory(player);
     }
 }
 

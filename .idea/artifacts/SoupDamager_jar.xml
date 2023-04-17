@@ -3,8 +3,12 @@
     <output-path>$PROJECT_DIR$/out/artifacts/SoupDamager_jar</output-path>
     <root id="archive" name="SoupDamager.jar">
       <element id="module-output" name="SoupDamager" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/frengor/inventorymanagementplugin/1.0-SNAPSHOT/inventorymanagementplugin-1.0-20210604.215144-6.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.12.12/mongo-java-driver-3.12.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/frengor/inventorymanagementplugin-common/1.0-SNAPSHOT/inventorymanagementplugin-common-1.0-20210604.170116-5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/frengor/savingutil/1.1-SNAPSHOT/savingutil-1.1-20210604.170220-4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/frengor/inventorymanagementplugin-items/1.0-SNAPSHOT/inventorymanagementplugin-items-1.0-20210604.170113-5.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

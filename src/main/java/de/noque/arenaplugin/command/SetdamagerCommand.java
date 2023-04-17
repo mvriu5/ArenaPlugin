@@ -14,18 +14,24 @@ public class SetdamagerCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player)) { return false; }
+        if (!(sender instanceof Player)) return false;
 
         Player player = (Player) sender;
 
+        /* COMMAND */
         if (player.isOp()) {
-
             ConfigManager.setDamager(player.getLocation());
-
             player.sendMessage(ChatColor.YELLOW + "You set the damager-spawnpoint!");
+            return true;
+        }
 
-        } else { player.sendMessage(ChatColor.RED + "You don't got permission to do that"); }
+        /* ERROR HANDLING */
+        if (!player.isOp()) {
+            player.sendMessage(ChatColor.RED + "You don't got permission to do that");
+            return false;
+        }
 
         return false;
+
     }
 }

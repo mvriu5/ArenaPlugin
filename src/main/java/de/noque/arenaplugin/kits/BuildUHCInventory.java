@@ -1,22 +1,18 @@
 package de.noque.arenaplugin.kits;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class BuildUHCInventory {
 
-    public BuildUHCInventory(Player player) {
-        getDefaultInv(player);
-    }
-
-    public static Inventory getDefaultInv(Player player) {
-
-        player.getInventory().clear();
+    public static Inventory getInv() {
+        Inventory inv = Bukkit.createInventory(null, InventoryType.PLAYER);
 
         ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
@@ -71,28 +67,28 @@ public class BuildUHCInventory {
         head.setItemMeta(headMeta);
 
 
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
+        inv.setItem(15, helmet);
+        inv.setItem(16, chestplate);
+        inv.setItem(17, leggings);
+        inv.setItem(18, boots);
 
-        player.getInventory().setItem(0, sword);
-        player.getInventory().setItem(1, rod);
-        player.getInventory().setItem(2, bow);
-        player.getInventory().setItem(3, lava1);
-        player.getInventory().setItem(4, lava2);
-        player.getInventory().setItem(5, water1);
-        player.getInventory().setItem(6, water2);
-        player.getInventory().setItem(7, gap);
-        player.getInventory().setItem(8, head);
+        inv.setItem(0, sword);
+        inv.setItem(1, rod);
+        inv.setItem(2, bow);
+        inv.setItem(3, lava1);
+        inv.setItem(4, lava2);
+        inv.setItem(5, water1);
+        inv.setItem(6, water2);
+        inv.setItem(7, gap);
+        inv.setItem(8, head);
 
-        player.getInventory().setItem(9, pickaxe);
-        player.getInventory().setItem(10, axe);
-        player.getInventory().setItem(11, cobble);
-        player.getInventory().setItem(12, wood);
-        player.getInventory().setItem(13, arrow);
-        player.getInventory().setItem(14, steak);
+        inv.setItem(9, pickaxe);
+        inv.setItem(10, axe);
+        inv.setItem(11, cobble);
+        inv.setItem(12, wood);
+        inv.setItem(13, arrow);
+        inv.setItem(14, steak);
 
-        return player.getInventory();
+        return inv;
     }
 }

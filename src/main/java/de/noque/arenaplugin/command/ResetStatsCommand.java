@@ -1,6 +1,6 @@
 package de.noque.arenaplugin.command;
 
-import de.noque.arenaplugin.PlayerStats;
+import de.noque.arenaplugin.StatsData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -14,23 +14,33 @@ public class ResetStatsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        if (!(sender instanceof Player)) return false;
 
-            if (player.isOp()) {
+        Player player = (Player) sender;
+        OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
-                if (args.length == 1) {
-
-                    OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-
-                    if (target.hasPlayedBefore()) {
-                        PlayerStats.reset(target);
-                        player.sendMessage(ChatColor.YELLOW + "You resetted the statistics of " + target.getName());
-
-                    } else { player.sendMessage(ChatColor.RED + "The requested player doesn't exist."); }
-                } else { player.sendMessage(ChatColor.RED + "Invalid usage! Use: /reset <player>"); }
-            } else { player.sendMessage(ChatColor.RED + "You don't got permission to do that"); }
+        /* COMMAND */
+        if (player.isOp() && args.length == 1 && target.hasPlayedBefore()) {
+            StatsData.reset(target);
+            player.sendMessage(ChatColor.YELLOW + "You resetted the statistics of " + target.getName());
+            return true;
         }
+
+        /* ERROR HANDLING */
+        if (!player.isOp()) {
+            player.sendMessage(ChatColor.RED + "You don't got permission to do that");
+            return false;
+        }
+        if (args.length != 1) {
+            player.sendMessage(ChatColor.RED + "Invalid usage! Use: /reset <player>");
+            return false;
+        }
+        if (target == null) {
+            player.sendMessage(ChatColor.RED + "The requested player doesn't exist.");
+            return false;
+        }
+
         return false;
+
     }
 }

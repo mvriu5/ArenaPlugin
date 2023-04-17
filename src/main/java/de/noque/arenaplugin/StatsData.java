@@ -6,13 +6,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class PlayerStats {
+public class StatsData {
 
     /* LOAD STATS */
     public static void load(Player player) {
         if (ArenaPlugin.getStatsCollection().countDocuments(Filters.eq("UUID", player.getUniqueId())) == 0) {
-            ArenaPlugin.getStatsCollection().insertOne(new Document("UUID", player.getUniqueId()).append("kills", 0).append("deaths", 0));
-            System.out.println(ChatColor.BLUE + "Document created for: "+ player.getName());
+            ArenaPlugin.getStatsCollection().insertOne(new Document("UUID", player.getUniqueId())
+                    .append("kills", 0)
+                    .append("deaths", 0));
+            System.out.println(ChatColor.BLUE + "STATS Document created for: " + player.getName());
         }
     }
 

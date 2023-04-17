@@ -11,7 +11,6 @@ public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
-
         Player player = (Player) e.getEntity();
 
         //FallDamage, LobbyDamage canceln
@@ -23,7 +22,6 @@ public class DamageListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent e) {
-
         Player player = (Player) e.getEntity();
 
         if(e.getDamager() instanceof  Player){

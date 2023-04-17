@@ -11,12 +11,15 @@ public class FixCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] arhs) {
 
-        if (sender instanceof Player) {
+        if (!(sender instanceof Player)) return false;
 
-            Player player = (Player) sender;
-            player.teleport(player.getLocation());
-            player.sendMessage(ChatColor.GREEN + "Fixed!");
-        }
+        Player player = (Player) sender;
+
+        /* COMMAND */
+        player.teleport(player.getLocation());
+        player.sendMessage(ChatColor.GREEN + "Fixed!");
+
         return false;
+
     }
 }

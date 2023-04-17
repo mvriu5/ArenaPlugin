@@ -8,28 +8,38 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public class ClearCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player) {
+        if (!(sender instanceof Player)) return false;
 
-            Player player = (Player) sender;
+        Player player = (Player) sender;
+        UUID uuid = player.getUniqueId();
 
-            if (ArenaPlugin.getLobby().contains(player.getUniqueId())) {
-                player.sendMessage(ChatColor.RED + "You can't clear if u have no kit selected.");
-
-            } else {
-                if (!(ArenaPlugin.getKit().get(player.getUniqueId()).equals("Damager"))) {
-                    new SpawnGUI(player);
-                    ArenaPlugin.addToLobby(player);
-                    ArenaPlugin.removeFromEditor(player);
-                    ArenaPlugin.removeFromKit(player);
-
-                } else { player.sendMessage(ChatColor.RED + "You can't clear in the damager area."); }
-            }
+        /* COMMAND */
+        if (!ArenaPlugin.getKit().get(uuid).equals("Damager")) {
+            ArenaPlugin.addToLobby(player);
+            ArenaPlugin.removeFromEditor(player);
+            ArenaPlugin.removeFromKit(player);
+            new SpawnGUI(player);
+            return true;
         }
-        return false;
+
+        /* ERROR HANDLING */
+        if (ArenaPlugin.getKit().get(uuid).equals("Damager")) {
+            player.sendMessage(ChatColor.RED + "You can't clear in the damager area.");
+            return false;
+        }
+        if (ArenaPlugin.getLobby().contains(uuid)) {
+            player.sendMessage(ChatColor.RED + "You can't clear if u have no kit selected.");
+            return false;
+        }
+
+    return false;
+
     }
 }

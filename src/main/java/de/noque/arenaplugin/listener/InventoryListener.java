@@ -2,9 +2,6 @@ package de.noque.arenaplugin.listener;
 
 import de.noque.arenaplugin.ArenaPlugin;
 import de.noque.arenaplugin.EditorData;
-import de.noque.arenaplugin.kits.BuildUHCInventory;
-import de.noque.arenaplugin.kits.RodInventory;
-import de.noque.arenaplugin.kits.SoupInventory;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -12,13 +9,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.potion.PotionEffect;
+
+import static org.bukkit.potion.PotionEffectType.DAMAGE_RESISTANCE;
 
 public class InventoryListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        e.setCancelled(false);
 
         //Cancel item dragging
         if (ArenaPlugin.getLobby().contains(player.getUniqueId()) || player.getGameMode().equals(GameMode.SURVIVAL)) {
@@ -31,15 +31,22 @@ public class InventoryListener implements Listener {
             switch(e.getCurrentItem().getType()) {
                 case FISHING_ROD:
                     ArenaPlugin.addToKit(player, "Rod");
-                    EditorData.getData(player, "Rod");
+                    Inventory rodInv = EditorData.getInventory(player, "Rod");
+                    player.getInventory().clear();
+                    player.getInventory().addItem(rodInv.getContents());
                     break;
                 case MUSHROOM_SOUP:
                     ArenaPlugin.addToKit(player, "Soup");
-                    EditorData.getData(player, "Rod");
+                    Inventory soupInv = EditorData.getInventory(player, "Soup");
+                    player.addPotionEffect(new PotionEffect(DAMAGE_RESISTANCE, 99999,2));
+                    player.getInventory().clear();
+                    player.getInventory().addItem(soupInv.getContents());
                     break;
                 case LAVA_BUCKET:
                     ArenaPlugin.addToKit(player, "BuildUHC");
-                    EditorData.getData(player, "Rod");
+                    Inventory buildInv = EditorData.getInventory(player, "BuildUHC");
+                    player.getInventory().clear();
+                    player.getInventory().addItem(buildInv.getContents());
                     break;
                 default:
                     break;
@@ -48,8 +55,6 @@ public class InventoryListener implements Listener {
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 0.1F, 0.5F);
             player.setGameMode(GameMode.SURVIVAL);
             player.closeInventory();
-
-
         }
 
         //KIT EDITOR
@@ -58,15 +63,21 @@ public class InventoryListener implements Listener {
             switch(e.getCurrentItem().getType()) {
                 case FISHING_ROD:
                     ArenaPlugin.addToEditor(player, "Rod");
-                    EditorData.getData(player, "Rod");
+                    Inventory rodInv = EditorData.getInventory(player, "Rod");
+                    player.getInventory().clear();
+                    player.getInventory().addItem(rodInv.getContents());
                     break;
                 case MUSHROOM_SOUP:
                     ArenaPlugin.addToEditor(player, "Soup");
-                    EditorData.getData(player, "Soup");
+                    Inventory soupInv = EditorData.getInventory(player, "Soup");
+                    player.getInventory().clear();
+                    player.getInventory().addItem(soupInv.getContents());
                     break;
                 case LAVA_BUCKET:
                     ArenaPlugin.addToEditor(player, "BuildUHC");
-                    EditorData.getData(player, "BuildUHC");
+                    Inventory buildInv = EditorData.getInventory(player, "BuildUHC");
+                    player.getInventory().clear();
+                    player.getInventory().addItem(buildInv.getContents());
                     break;
                 default:
                     break;
@@ -76,8 +87,6 @@ public class InventoryListener implements Listener {
             player.sendMessage(ChatColor.GREEN + "Save your kit with " + ChatColor.YELLOW + "/save");
             player.setGameMode(GameMode.SURVIVAL);
             player.closeInventory();
-
-
         }
     }
 }

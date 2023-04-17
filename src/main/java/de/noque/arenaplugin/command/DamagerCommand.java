@@ -17,27 +17,29 @@ public class DamagerCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player) {
+        if (!(sender instanceof Player)) return false;
 
-            Player player = (Player) sender;
+        Player player = (Player) sender;
 
-            ArenaPlugin.removeFromLobby(player);
-            ArenaPlugin.removeFromEditor(player);
-            ArenaPlugin.removeFromKit(player);
-            ArenaPlugin.addToKit(player, "Damager");
+        /* COMMAND */
+        ArenaPlugin.removeFromLobby(player);
+        ArenaPlugin.removeFromEditor(player);
+        ArenaPlugin.removeFromKit(player);
+        ArenaPlugin.addToKit(player, "Damager");
 
-            new SpawnGUI(player);
-            new DamagerInventory(player);
+        new SpawnGUI(player);
+        new DamagerInventory(player);
 
-            player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 0.5F);
-            player.setGameMode(GameMode.SURVIVAL);
+        player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 0.5F);
+        player.setGameMode(GameMode.SURVIVAL);
 
-            try {
-                player.teleport(ConfigManager.getDamager());
-            } catch (NullPointerException ex) {
-                player.sendMessage(ChatColor.RED + "Damager isn't set yet.");
-            }
+        try {
+            player.teleport(ConfigManager.getDamager());
+        } catch (NullPointerException ex) {
+            player.sendMessage(ChatColor.RED + "Damager isn't set yet.");
         }
+
         return false;
+
     }
 }

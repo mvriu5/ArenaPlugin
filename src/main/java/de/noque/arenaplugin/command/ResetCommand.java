@@ -13,28 +13,29 @@ public class ResetCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
 
-        if (sender instanceof Player) {
+        if (!(sender instanceof Player)) return false;
 
-            Player player = (Player) sender;
+        Player player = (Player) sender;
 
-            if (player.isOp()) {
+        /* COMMAND */
+        if (player.isOp()) {
 
-                for (int i = 0; i < ArenaPlugin.getNewBlocks().size(); i++) {
+            for (int i = 0; i < ArenaPlugin.getNewBlocks().size(); i++) {
 
-                    if (ArenaPlugin.getNewBlocks().get(i).getType() == Material.COBBLESTONE || ArenaPlugin.getNewBlocks().get(i).getType() == Material.OBSIDIAN ||
+                if (ArenaPlugin.getNewBlocks().get(i).getType() == Material.COBBLESTONE || ArenaPlugin.getNewBlocks().get(i).getType() == Material.OBSIDIAN ||
                         ArenaPlugin.getNewBlocks().get(i).getType() == Material.LAVA || ArenaPlugin.getNewBlocks().get(i).getType() == Material.STATIONARY_LAVA ||
                         ArenaPlugin.getNewBlocks().get(i).getType() == Material.WATER || ArenaPlugin.getNewBlocks().get(i).getType() == Material.STATIONARY_WATER ||
                         ArenaPlugin.getNewBlocks().get(i).getType() == Material.WOOD) {
 
-                        ArenaPlugin.getNewBlocks().get(i).setType(Material.AIR);
-                    }
+                    ArenaPlugin.getNewBlocks().get(i).setType(Material.AIR);
                 }
-                ArenaPlugin.getNewBlocks().clear();
-
-                player.sendMessage(ChatColor.YELLOW + "You resetted the map.");
             }
+            ArenaPlugin.getNewBlocks().clear();
+            player.sendMessage(ChatColor.YELLOW + "You resetted the map.");
+            return true;
         }
 
         return false;
+
     }
 }
