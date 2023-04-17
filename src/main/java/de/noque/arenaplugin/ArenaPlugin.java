@@ -55,7 +55,7 @@ public final class ArenaPlugin extends JavaPlugin {
         statsCollection = getMongoManager().getDatabase().getCollection("stats");
         editorCollection = getMongoManager().getDatabase().getCollection("editor");
 
-        /*    Commands    */
+        /* Commands */
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("setspawn").setExecutor(new SetspawnCommand());
         getCommand("damager").setExecutor(new DamagerCommand());
@@ -70,7 +70,7 @@ public final class ArenaPlugin extends JavaPlugin {
         getCommand("resetstats").setExecutor(new ResetStatsCommand());
         getCommand("save").setExecutor(new SaveCommand());
 
-        /*    Events    */
+        /* Events */
         Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
         Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new DeathListener(), this);
