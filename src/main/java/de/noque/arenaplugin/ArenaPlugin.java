@@ -1,6 +1,5 @@
 package de.noque.arenaplugin;
 
-import com.fren_gor.invManagementPlugin.api.itemStack.ItemStackSerializer;
 import com.mongodb.client.MongoCollection;
 import de.noque.arenaplugin.command.*;
 import de.noque.arenaplugin.listener.*;
@@ -11,7 +10,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
-@Getter
 public final class ArenaPlugin extends JavaPlugin {
 
     //Plugin
@@ -27,6 +24,7 @@ public final class ArenaPlugin extends JavaPlugin {
     public static Configuration config;
 
     //MongoDB
+    @Getter
     private MongoManager mongoManager;
     @Getter
     private static MongoCollection<Document> statsCollection;
@@ -44,7 +42,6 @@ public final class ArenaPlugin extends JavaPlugin {
     private static HashMap<UUID, String> editor = new HashMap<>();
     @Getter
     private static HashMap<UUID, String> kit = new HashMap<>();
-
 
     @Override
     public void onEnable() {
@@ -129,16 +126,6 @@ public final class ArenaPlugin extends JavaPlugin {
             }
         }
         getNewBlocks().clear();
-    }
-
-    /* SERIALIZE INVENTORY */
-    public static String serializeInv(Inventory inv) {
-        return ItemStackSerializer.serializeInventory(inv);
-    }
-
-    /* DESERIALIZE INVENTORY */
-    public static Inventory deserializeInv(Player player, String inv) {
-        return ItemStackSerializer.deserializeInventory(inv).toInventory(player);
     }
 }
 

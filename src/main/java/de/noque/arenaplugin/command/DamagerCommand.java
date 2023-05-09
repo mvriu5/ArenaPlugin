@@ -38,8 +38,6 @@ public class DamagerCommand implements CommandExecutor {
         } catch (NullPointerException ex) {
             player.sendMessage(ChatColor.RED + "Damager isn't set yet.");
         }
-
         return false;
-
     }
 }

@@ -5,7 +5,9 @@ import de.noque.arenaplugin.ConfigManager;
 import de.noque.arenaplugin.EditorData;
 import de.noque.arenaplugin.StatsData;
 import de.noque.arenaplugin.gui.SpawnGUI;
+import de.noque.arenaplugin.kits.BuildUHCInventory;
 import de.noque.arenaplugin.kits.DamagerInventory;
+import de.noque.arenaplugin.kits.RodInventory;
 import de.noque.arenaplugin.util.InstantFirework;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -74,25 +76,25 @@ public class DeathListener implements Listener {
                 //Message
                 double health = Math.round(killer.getHealth() * 100) / 100.0;
                 e.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.YELLOW + " was slain by " + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " (" + ChatColor.RED + health/2 + "❤" + ChatColor.GRAY + ")");
-                killer.setHealth(20.0);
 
                 //Give kit to killer
                 killer.setHealth(20.0);
                 switch (ArenaPlugin.getKit().get(killer.getUniqueId())) {
                     case "Rod":
-                        Inventory rodInv = EditorData.getInventory(killer, "Rod");
-                        killer.getInventory().clear();
-                        killer.getInventory().addItem(rodInv.getContents());
+                        Inventory rodInv = EditorData.getInventory(player, "Rod");
+                        player.getInventory().clear();
+                        player.getInventory().setContents(rodInv.getContents());
+                        RodInventory.getArmor(player);
                         break;
                     case "Soup":
                         Inventory soupInv = EditorData.getInventory(killer, "Soup");
-                        killer.getInventory().clear();
-                        killer.getInventory().addItem(soupInv.getContents());
+                        player.getInventory().setContents(soupInv.getContents());
                         break;
                     case "BuildUHC":
-                        Inventory buildInv = EditorData.getInventory(killer, "BuildUHC");
-                        killer.getInventory().clear();
-                        killer.getInventory().addItem(buildInv.getContents());
+                        Inventory buildInv = EditorData.getInventory(player, "BuildUHC");
+                        player.getInventory().clear();
+                        player.getInventory().setContents(buildInv.getContents());
+                        BuildUHCInventory.getArmor(player);
                         break;
                     default:
                         break;

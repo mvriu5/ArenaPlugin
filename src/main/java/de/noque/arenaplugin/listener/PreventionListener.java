@@ -21,7 +21,7 @@ import static org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason.SATIA
 
 public class PreventionListener implements Listener {
 
-    private ArenaPlugin plugin;
+    private final ArenaPlugin plugin;
     public PreventionListener(ArenaPlugin plugin) {
         this.plugin = plugin;
     }
@@ -29,12 +29,14 @@ public class PreventionListener implements Listener {
      @EventHandler
      public void onBlockPlace(BlockPlaceEvent e) {
          Player player = e.getPlayer();
+         e.setCancelled(true);
 
-         if (!(player.getGameMode() == GameMode.CREATIVE)) {
-             e.setCancelled(true);
+         if (player.getGameMode() == GameMode.CREATIVE) {
+             e.setCancelled(false);
          }
-         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC") && e.getBlock().getY() > 28) {
-             e.setCancelled(true);
+
+         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC") && e.getBlock().getY() < 29) {
+             e.setCancelled(false);
              ArenaPlugin.getNewBlocks().add(e.getBlock());
          }
      }
@@ -42,9 +44,10 @@ public class PreventionListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
+        e.setCancelled(true);
 
-        if (!(player.getGameMode() == GameMode.CREATIVE)) {
-            e.setCancelled(true);
+        if (player.getGameMode() == GameMode.CREATIVE) {
+            e.setCancelled(false);
         }
         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC") && ArenaPlugin.getNewBlocks().contains(e.getBlock())) {
             e.setCancelled(false);
@@ -59,9 +62,10 @@ public class PreventionListener implements Listener {
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
         Player player = e.getPlayer();
+        e.setCancelled(true);
 
-        if (ArenaPlugin.getLobby().contains(player.getUniqueId()) && player.getGameMode().equals(GameMode.SURVIVAL)) {
-            e.setCancelled(true);
+        if (ArenaPlugin.getKit().containsKey(player.getUniqueId())) {
+            e.setCancelled(false);
         }
 
         //Schedule remove of the item in 15 Seconds.
@@ -77,24 +81,27 @@ public class PreventionListener implements Listener {
     @EventHandler
     public void onPickUp(PlayerPickupItemEvent e) {
          Player player = e.getPlayer();
+         e.setCancelled(true);
 
-        if (ArenaPlugin.getLobby().contains(player.getUniqueId()) && player.getGameMode().equals(GameMode.SURVIVAL)) {
-            e.setCancelled(true);
+        if (!ArenaPlugin.getLobby().contains(player.getUniqueId()) && player.getGameMode().equals(GameMode.SURVIVAL)) {
+            e.setCancelled(false);
         }
     }
 
     @EventHandler
     public void onCraft(CraftItemEvent e) {
         Player player = (Player) e.getWhoClicked();
+        e.setCancelled(true);
 
-        if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-            e.setCancelled(true);
+        if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("Soup") || ArenaPlugin.getKit().get(player.getUniqueId()).equals("Damager")) {
+            e.setCancelled(false);
         }
     }
 
     @EventHandler
     public void onRegainHealth(EntityRegainHealthEvent e) {
         Player player = (Player) e.getEntity();
+        e.setCancelled(false);
 
         if (ArenaPlugin.getKit().get(player.getUniqueId()).equals("BuildUHC") && (e.getRegainReason() == SATIATED || e.getRegainReason() == REGEN)) {
             e.setCancelled(true);

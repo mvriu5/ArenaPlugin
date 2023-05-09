@@ -1,8 +1,8 @@
 package de.noque.arenaplugin.kits;
 
-import de.noque.arenaplugin.ArenaPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,18 +22,21 @@ public class RodInventory {
         ItemMeta rodMeta = rod.getItemMeta();
         rod.setItemMeta(rodMeta);
 
+        inv.setItem(0, sword);
+        inv.setItem(1, rod);
+
+        return inv;
+    }
+
+    public static void getArmor(Player player) {
         ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
         ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
         ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
 
-        inv.setItem(0, sword);
-        inv.setItem(1, rod);
-        inv.setItem(2, helmet);
-        inv.setItem(3, chestplate);
-        inv.setItem(4, leggings);
-        inv.setItem(5, boots);
-
-        return inv;
+        player.getInventory().setHelmet(helmet);
+        player.getInventory().setChestplate(chestplate);
+        player.getInventory().setLeggings(leggings);
+        player.getInventory().setBoots(boots);
     }
 }

@@ -30,8 +30,6 @@ public class SpawnCommand implements CommandExecutor {
         } catch (NullPointerException ex) {
             player.sendMessage(ChatColor.RED + "Spawn isn't set yet.");
         }
-
         return false;
-
     }
 }

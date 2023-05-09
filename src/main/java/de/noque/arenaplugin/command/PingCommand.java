@@ -18,11 +18,11 @@ public class PingCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         /* COMMAND */
-        //onw ping
+        //own ping
         if (args.length == 0) {
             int ping = ((CraftPlayer) player).getHandle().ping;
             player.sendMessage(ChatColor.GREEN + "Your ping: " + ping + "ms");
-            return true;
+            return false;
         }
 
         //other players ping
@@ -32,14 +32,11 @@ public class PingCommand implements CommandExecutor {
             if (target != null) {
                 int target_ping = ((CraftPlayer) target).getHandle().ping;
                 player.sendMessage(ChatColor.GREEN + target.getName() + "'s ping: " + target_ping + "ms");
-                return true;
             } else {
                 player.sendMessage(ChatColor.RED + "This Player is not online.");
-                return false;
             }
+            return false;
         }
-
         return false;
-
     }
 }

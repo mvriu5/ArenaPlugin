@@ -17,25 +17,21 @@ public class ResetCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
+        if (!player.isOp()) return false;
+
         /* COMMAND */
-        if (player.isOp()) {
+        for (int i = 0; i < ArenaPlugin.getNewBlocks().size(); i++) {
 
-            for (int i = 0; i < ArenaPlugin.getNewBlocks().size(); i++) {
+            if (ArenaPlugin.getNewBlocks().get(i).getType() == Material.COBBLESTONE || ArenaPlugin.getNewBlocks().get(i).getType() == Material.OBSIDIAN ||
+                    ArenaPlugin.getNewBlocks().get(i).getType() == Material.LAVA || ArenaPlugin.getNewBlocks().get(i).getType() == Material.STATIONARY_LAVA ||
+                    ArenaPlugin.getNewBlocks().get(i).getType() == Material.WATER || ArenaPlugin.getNewBlocks().get(i).getType() == Material.STATIONARY_WATER ||
+                    ArenaPlugin.getNewBlocks().get(i).getType() == Material.WOOD) {
 
-                if (ArenaPlugin.getNewBlocks().get(i).getType() == Material.COBBLESTONE || ArenaPlugin.getNewBlocks().get(i).getType() == Material.OBSIDIAN ||
-                        ArenaPlugin.getNewBlocks().get(i).getType() == Material.LAVA || ArenaPlugin.getNewBlocks().get(i).getType() == Material.STATIONARY_LAVA ||
-                        ArenaPlugin.getNewBlocks().get(i).getType() == Material.WATER || ArenaPlugin.getNewBlocks().get(i).getType() == Material.STATIONARY_WATER ||
-                        ArenaPlugin.getNewBlocks().get(i).getType() == Material.WOOD) {
-
-                    ArenaPlugin.getNewBlocks().get(i).setType(Material.AIR);
-                }
+                ArenaPlugin.getNewBlocks().get(i).setType(Material.AIR);
             }
-            ArenaPlugin.getNewBlocks().clear();
-            player.sendMessage(ChatColor.YELLOW + "You resetted the map.");
-            return true;
         }
-
+        ArenaPlugin.getNewBlocks().clear();
+        player.sendMessage(ChatColor.YELLOW + "You resetted the map.");
         return false;
-
     }
 }

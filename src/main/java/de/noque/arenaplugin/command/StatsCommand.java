@@ -26,37 +26,29 @@ public class StatsCommand implements CommandExecutor {
             player.sendMessage(ChatColor.YELLOW + "Death: " + StatsData.getDeaths(player));
             player.sendMessage(ChatColor.YELLOW + "K/D: " + StatsData.getKD(player));
             player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.STRIKETHROUGH + "                           ");
-            return true;
+            return false;
         }
 
         /* OTHER PLAYERS STATS */
         if (args.length == 1) {
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
-            if (target.hasPlayedBefore()) {
-                player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + target.getName() + "'s Statistics:");
-                player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.STRIKETHROUGH + "                                  ");
-                player.sendMessage(ChatColor.YELLOW + "Kill: " + StatsData.getKills(target));
-                player.sendMessage(ChatColor.YELLOW + "Death: " + StatsData.getDeaths(target));
-                player.sendMessage(ChatColor.YELLOW + "K/D: " + StatsData.getKD(target));
-                player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.STRIKETHROUGH + "                                  ");
-                return true;
-
-            }
             /* ERROR HANDLING */
             if (!target.hasPlayedBefore()) {
                 player.sendMessage(ChatColor.RED + "The requested player doesn't exist.");
                 return false;
             }
-        }
-
-        /* ERROR HANDLING */
-        if (args.length > 1) {
-            player.sendMessage(ChatColor.RED + "Invalid usage! Use: /stats <player>");
+            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + target.getName() + "'s Statistics:");
+            player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.STRIKETHROUGH + "                                  ");
+            player.sendMessage(ChatColor.YELLOW + "Kill: " + StatsData.getKills(target));
+            player.sendMessage(ChatColor.YELLOW + "Death: " + StatsData.getDeaths(target));
+            player.sendMessage(ChatColor.YELLOW + "K/D: " + StatsData.getKD(target));
+            player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.STRIKETHROUGH + "                                  ");
             return false;
         }
 
+        /* ERROR HANDLING */
+        player.sendMessage(ChatColor.RED + "Invalid usage! Use: /stats <player>");
         return false;
-
     }
 }

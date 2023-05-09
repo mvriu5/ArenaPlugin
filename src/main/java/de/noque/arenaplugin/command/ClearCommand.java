@@ -26,20 +26,14 @@ public class ClearCommand implements CommandExecutor {
             ArenaPlugin.removeFromEditor(player);
             ArenaPlugin.removeFromKit(player);
             new SpawnGUI(player);
-            return true;
+            return false;
         }
 
         /* ERROR HANDLING */
-        if (ArenaPlugin.getKit().get(uuid).equals("Damager")) {
-            player.sendMessage(ChatColor.RED + "You can't clear in the damager area.");
+        if (ArenaPlugin.getKit().get(uuid).equals("Damager") || ArenaPlugin.getLobby().contains(uuid)) {
+            player.sendMessage(ChatColor.RED + "You can't clear if you have no kit selected!");
             return false;
         }
-        if (ArenaPlugin.getLobby().contains(uuid)) {
-            player.sendMessage(ChatColor.RED + "You can't clear if u have no kit selected.");
-            return false;
-        }
-
-    return false;
-
+        return false;
     }
 }

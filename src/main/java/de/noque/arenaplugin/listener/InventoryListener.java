@@ -2,6 +2,8 @@ package de.noque.arenaplugin.listener;
 
 import de.noque.arenaplugin.ArenaPlugin;
 import de.noque.arenaplugin.EditorData;
+import de.noque.arenaplugin.kits.BuildUHCInventory;
+import de.noque.arenaplugin.kits.RodInventory;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -19,10 +21,10 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
+        e.setCancelled(true);
 
-        //Cancel item dragging
-        if (ArenaPlugin.getLobby().contains(player.getUniqueId()) || player.getGameMode().equals(GameMode.SURVIVAL)) {
-            e.setCancelled(true);
+        if (ArenaPlugin.getEditor().containsKey(player.getUniqueId()) || ArenaPlugin.getKit().containsKey(player.getUniqueId())) {
+            e.setCancelled(false);
         }
 
         //KIT SELECTION
@@ -33,20 +35,22 @@ public class InventoryListener implements Listener {
                     ArenaPlugin.addToKit(player, "Rod");
                     Inventory rodInv = EditorData.getInventory(player, "Rod");
                     player.getInventory().clear();
-                    player.getInventory().addItem(rodInv.getContents());
+                    player.getInventory().setContents(rodInv.getContents());
+                    RodInventory.getArmor(player);
                     break;
                 case MUSHROOM_SOUP:
                     ArenaPlugin.addToKit(player, "Soup");
                     Inventory soupInv = EditorData.getInventory(player, "Soup");
                     player.addPotionEffect(new PotionEffect(DAMAGE_RESISTANCE, 99999,2));
                     player.getInventory().clear();
-                    player.getInventory().addItem(soupInv.getContents());
+                    player.getInventory().setContents(soupInv.getContents());
                     break;
                 case LAVA_BUCKET:
                     ArenaPlugin.addToKit(player, "BuildUHC");
                     Inventory buildInv = EditorData.getInventory(player, "BuildUHC");
                     player.getInventory().clear();
-                    player.getInventory().addItem(buildInv.getContents());
+                    player.getInventory().setContents(buildInv.getContents());
+                    BuildUHCInventory.getArmor(player);
                     break;
                 default:
                     break;
@@ -65,19 +69,19 @@ public class InventoryListener implements Listener {
                     ArenaPlugin.addToEditor(player, "Rod");
                     Inventory rodInv = EditorData.getInventory(player, "Rod");
                     player.getInventory().clear();
-                    player.getInventory().addItem(rodInv.getContents());
+                    player.getInventory().setContents(rodInv.getContents());
                     break;
                 case MUSHROOM_SOUP:
                     ArenaPlugin.addToEditor(player, "Soup");
                     Inventory soupInv = EditorData.getInventory(player, "Soup");
                     player.getInventory().clear();
-                    player.getInventory().addItem(soupInv.getContents());
+                    player.getInventory().setContents(soupInv.getContents());
                     break;
                 case LAVA_BUCKET:
                     ArenaPlugin.addToEditor(player, "BuildUHC");
                     Inventory buildInv = EditorData.getInventory(player, "BuildUHC");
                     player.getInventory().clear();
-                    player.getInventory().addItem(buildInv.getContents());
+                    player.getInventory().setContents(buildInv.getContents());
                     break;
                 default:
                     break;

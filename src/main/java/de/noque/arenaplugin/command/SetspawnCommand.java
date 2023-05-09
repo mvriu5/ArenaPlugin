@@ -18,19 +18,15 @@ public class SetspawnCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        /* COMMAND */
-        if (player.isOp()) {
-            ConfigManager.setSpawn(player.getLocation());
-            player.sendMessage(ChatColor.YELLOW + "You set the spawnpoint!");
-            return true;
-        }
-
         /* ERROR HANDLING */
         if (!player.isOp()) {
             player.sendMessage(ChatColor.RED + "You don't got permission to do that");
             return false;
         }
 
+        /* COMMAND */
+        ConfigManager.setSpawn(player.getLocation());
+        player.sendMessage(ChatColor.YELLOW + "You set the spawnpoint!");
         return false;
 
     }

@@ -29,7 +29,6 @@ public class HelpCommand implements CommandExecutor {
         player.sendMessage(ChatColor.YELLOW + "/kit <player>" + ChatColor.GRAY + " - Get the current kit of a player");
         player.sendMessage(ChatColor.YELLOW + "/stats <player>" + ChatColor.GRAY + " - Get the stats of a player");
 
-    return false;
-
+        return false;
     }
 }

@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -13,19 +14,6 @@ public class BuildUHCInventory {
 
     public static Inventory getInv() {
         Inventory inv = Bukkit.createInventory(null, InventoryType.PLAYER);
-
-        ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
-
-        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-
-        ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-
-        ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
-
 
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
@@ -66,12 +54,6 @@ public class BuildUHCInventory {
         headMeta.setDisplayName(ChatColor.GOLD + "Golden Head");
         head.setItemMeta(headMeta);
 
-
-        inv.setItem(15, helmet);
-        inv.setItem(16, chestplate);
-        inv.setItem(17, leggings);
-        inv.setItem(18, boots);
-
         inv.setItem(0, sword);
         inv.setItem(1, rod);
         inv.setItem(2, bow);
@@ -90,5 +72,24 @@ public class BuildUHCInventory {
         inv.setItem(14, steak);
 
         return inv;
+    }
+
+    public static void getArmor(Player player) {
+        ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
+        helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
+
+        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+
+        ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+
+        ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
+
+        player.getInventory().setHelmet(helmet);
+        player.getInventory().setChestplate(chestplate);
+        player.getInventory().setLeggings(leggings);
+        player.getInventory().setBoots(boots);
     }
 }

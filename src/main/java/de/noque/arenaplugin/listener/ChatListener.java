@@ -10,7 +10,6 @@ public class ChatListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
-
         Player player = e.getPlayer();
 
         if (player.isOp()) {

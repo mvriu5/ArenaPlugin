@@ -23,7 +23,7 @@ public class ResetStatsCommand implements CommandExecutor {
         if (player.isOp() && args.length == 1 && target.hasPlayedBefore()) {
             StatsData.reset(target);
             player.sendMessage(ChatColor.YELLOW + "You resetted the statistics of " + target.getName());
-            return true;
+            return false;
         }
 
         /* ERROR HANDLING */
@@ -39,8 +39,6 @@ public class ResetStatsCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "The requested player doesn't exist.");
             return false;
         }
-
         return false;
-
     }
 }

@@ -2,6 +2,7 @@ package de.noque.arenaplugin.command;
 
 import de.noque.arenaplugin.ArenaPlugin;
 import de.noque.arenaplugin.EditorData;
+import de.noque.arenaplugin.gui.SpawnGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,18 +23,15 @@ public class SaveCommand implements CommandExecutor {
 
         /* COMMAND */
         if (ArenaPlugin.getEditor().containsKey(uuid)) {
-            String kit = ArenaPlugin.getEditor().get(uuid);
-            EditorData.update(player, kit);
+            EditorData.update(player, player.getInventory(), ArenaPlugin.getEditor().get(uuid));
             ArenaPlugin.removeFromEditor(player);
+            new SpawnGUI(player);
             player.sendMessage(ChatColor.GREEN + "Successfully updated your " + ArenaPlugin.getEditor().get(player.getUniqueId()) + " kit.");
-        }
-
-        /* ERROR HANDLING */
-        if (!ArenaPlugin.getEditor().containsKey(uuid)) {
-            player.sendMessage(ChatColor.RED + "You are not in the editor right now.");
             return false;
         }
 
+        /* ERROR HANDLING */
+        player.sendMessage(ChatColor.RED + "You are not in the editor right now.");
         return false;
     }
 }
